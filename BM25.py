@@ -9,13 +9,13 @@ def BM25(query, N, k1, k2, b, ratio_of_doc_len, r, R):
     query = query.split()
     unique_words = set(query)
 
-    # count frequency of each word in query and crear a dictionary
+    # count frequency of each word in query and create a dictionary
     query_freq = {}
     for word in query:
         query_freq[word] = query.count(word)
     print(query_freq)
 
-    # get input for occurence of each word in each document
+    # get input for occurence of each word in all the documents
     word_doc_occur = {}
     for word in query_freq:
         word_doc_occur[word] = {}
