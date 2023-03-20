@@ -3,6 +3,17 @@ import math
 def calculate_k(k1,b, avg_doc_len, doc_len):
     return k1 * ((1-b) + b * (doc_len/avg_doc_len))
 
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
 def BM25(query, N, k1, k2, b, ratio_of_doc_len, r, R):
 
     # identify unique words in query separated by space
@@ -13,20 +24,20 @@ def BM25(query, N, k1, k2, b, ratio_of_doc_len, r, R):
     query_freq = {}
     for word in query:
         query_freq[word] = query.count(word)
-    print(f"Query Frequencies are as follows: {query_freq}\n")
+    print(f"{bcolors.OKGREEN}Query Frequencies are as follows:{bcolors.ENDC} {bcolors.UNDERLINE}{query_freq}{bcolors.ENDC}\n")
 
     # get input for occurence of each word in all the documents (document frequency)
     doc_frequency = {}
     for word in query_freq:
         doc_frequency[word] = int(input("Enter Frequency of Occurence of " + word + " in All Documents (Document Frequency)" + ": "))
-    print(f"\nDocument Frequencies are as follows: {doc_frequency}\n")
+    print(f"\n{bcolors.OKGREEN}Document Frequencies are as follows:{bcolors.ENDC} {bcolors.UNDERLINE}{doc_frequency}{bcolors.ENDC}\n")
 
 
     # get input for occurence of each word in the document (term frequency)
     term_frequency = {}
     for word in query_freq:
         term_frequency[word] = int(input("Enter Frequency of Occurence of " + word + " in the Document (Term Frequency)" + ": "))
-    print(f"\nTerm Frequencies are as follows: {term_frequency}\n")
+    print(f"\n{bcolors.OKGREEN}Term Frequencies are as follows:{bcolors.ENDC} {bcolors.UNDERLINE}{term_frequency}{bcolors.ENDC}\n")
 
     # calcualting value of k
     k = calculate_k(k1, b, 1, ratio_of_doc_len)
